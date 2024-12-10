@@ -15,7 +15,7 @@ public class ControllerFilm {
         try{
             stm = con.createStatement();
             rs = stm.executeQuery(query);
-
+            System.out.println("Contenido de la tabla:");
         }catch (SQLException e){
             System.out.println("Error: "+e.getMessage());
         }
@@ -33,6 +33,29 @@ public class ControllerFilm {
         }catch (SQLException e){
             System.out.println("Error: "+e.getMessage());
         }
+    }
+    public ResultSet getMovieContentFigh(Connection con){
+        String query = "Select * from film Where title Like '%Fight%'";
+        ResultSet rs = null;
+        Statement stm;
+        try{
+            stm = con.createStatement();
+            rs = stm.executeQuery(query);
+            System.out.println("Contenido de la tabla:");
+        }catch (SQLException e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        return rs;
+    }
+    public void showMovieContentFigh(ResultSet rs){
+        try{
+            System.out.printf("%-25s %-20s\n","TITULO","DURACION");
+            while (rs.next()){
+                String titulo = rs.getString("title");
+                int duracion = rs.getInt("length");
+                System.out.printf("%-25s %-20s\n",titulo,duracion);
+            }
+        }catch (SQLException e){}
     }
 
 }
